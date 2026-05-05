@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────────── */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.10);
+  --glass-bg-strong: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.20);
+  --text-primary: #f0f4ff;
+  --text-secondary: rgba(240, 244, 255, 0.72);
+  --text-muted: rgba(240, 244, 255, 0.42);
+  --accent-blue: #7c9dff;
+  --accent-green: #6bffb8;
+  --accent-yellow: #ffd166;
+  --accent-red: #ff6b6b;
+  --accent-orange: #ffb86c;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0f0f23;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Glassmorphism ──────────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+/* ─── App Background ─────────────────────────────────────────────── */
+.app-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d1b4b 0%, #1a0b3d 40%, #0d2b2b 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ─── Background Orbs ────────────────────────────────────────────── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, #3b5fff, transparent); top: -120px; left: -120px; }
+.orb-2 { width: 420px; height: 420px; background: radial-gradient(circle, #cc44aa, transparent); bottom: -60px; right: -80px; }
+.orb-3 { width: 320px; height: 320px; background: radial-gradient(circle, #00c899, transparent); top: 40%; left: 55%; }
+
+/* ─── Content Layer ──────────────────────────────────────────────── */
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Gradient Text ──────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #f0f4ff, #7c9dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Score Ring Animation ───────────────────────────────────────── */
+.ring-fill {
+  transition: stroke-dasharray 1.2s ease;
+}
+
+/* ─── Card hover ─────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+}
+
+/* ─── Severity accent bars ───────────────────────────────────────── */
+.severity-bar-low    { border-left: 3px solid var(--accent-green); }
+.severity-bar-moderate { border-left: 3px solid var(--accent-yellow); }
+.severity-bar-high   { border-left: 3px solid var(--accent-red); }
+.severity-bar-info   { border-left: 3px solid var(--accent-blue); }
+
+/* ─── Input ──────────────────────────────────────────────────────── */
+input:focus { outline: none; }
+
+/* ─── Scrollable horizontal strip ───────────────────────────────── */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulseDot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(1.5); } }
+
+.animate-fade-in  { animation: fadeIn 0.4s ease-out; }
+.animate-slide-up { animation: slideUp 0.4s ease-out; }
+.animate-spin     { animation: spin 0.8s linear infinite; }
+.pulse-dot        { animation: pulseDot 2s infinite; }
